@@ -18,4 +18,7 @@ public class MerchantDao {
 	public Merchant verifyMerchant(String token) {
 		return repository.findMerchantByToken(token);
 	}
+	public Merchant findMerchantByEmail(String email) {
+		return repository.findMerchantByEmail(email);
+	}
 }
