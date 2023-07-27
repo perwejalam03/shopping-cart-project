@@ -27,4 +27,9 @@ public class MerchantController {
 	public String verifyMerchant(@RequestParam String token) {
 		return service.verifyMerchant(token);
 	}
+	
+	@GetMapping("/merchants/forgot-password")
+	public String forgotPassword(@RequestParam String email,HttpServletRequest request) {
+		return service.sendResetPasswordLink(email, request);
+	}
 }
