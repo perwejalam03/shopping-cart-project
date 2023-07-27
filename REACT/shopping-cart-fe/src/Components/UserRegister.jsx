@@ -6,13 +6,12 @@ const UserRegister = () => {
     const [name,setName]=useState("")
     const [phone,setPhone]=useState("")
     const [email,setEmail]=useState("")
-    const [status,setStatus]=useState("")
     const [password,setPassword]=useState("")
     const [gender,setGender]=useState("")
   
     const handleRegister=(e)=>{
-      const merchant={name,phone,email,status,password,gender}
-      axios.post("http://localhost:3000/users",merchant)
+      const merchant={name,phone,email,password,gender}
+      axios.post("http://localhost:8080/users",merchant)
       .then(()=>{
         alert("Data added successfully")
         console.log("Data has been registered");})
@@ -33,10 +32,6 @@ const UserRegister = () => {
       <Form.Group className="mb-3" controlId="formGroupEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter your email" value={email}  onChange={(e)=>setEmail(e.target.value)} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
-        <Form.Label>Status</Form.Label>
-        <Form.Control input type="text" value={status}  onChange={(e)=>setStatus(e.target.value)} placeholder="Enter Status" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formGroupPassword">
         <Form.Label>Password</Form.Label>
