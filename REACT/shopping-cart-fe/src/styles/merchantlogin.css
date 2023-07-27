@@ -1,0 +1,12 @@
+.input_group1{
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 25px;
+    transform: translate(500px,100px);
+    padding: 10px 40px;
+
+}
+.input_group1 button{
+    margin: 0px 15px;
+    padding: 0px 20px;
+}

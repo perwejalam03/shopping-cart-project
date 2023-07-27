@@ -1,0 +1,7 @@
+#form{
+    width: 60%;
+    margin: 20px 200px;
+    box-shadow: 0px 0px 10px black;
+    padding: 30px 50px;
+    background-image: linear-gradient(110deg,pink,gray);
+}

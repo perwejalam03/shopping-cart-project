@@ -1,0 +1,17 @@
+.landing{
+    width: 700px;
+    height: 250px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid black;
+    margin: 200px 380px;
+}
+.landing img{
+    height: 100px;
+}
+.landing img:hover{
+    transform: scale(1.1);
+    transition: 1s;
+    margin: 20px;
+}

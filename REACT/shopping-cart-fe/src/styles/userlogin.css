@@ -1,0 +1,13 @@
+
+.input_group{
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 25px;
+    transform: translate(500px,100px);
+    padding: 20px 100px;
+
+}
+
+.input_group button{
+    margin: 0px 5px;
+}
