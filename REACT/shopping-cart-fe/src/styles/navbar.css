@@ -1,0 +1,27 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: darkcyan;
+    height: 65px;
+    align-items: center;
+}
+.logo>img{
+    width: 100px;
+    height: 65px;
+    mix-blend-mode: darken;
+}
+.profile>img{
+    width: 40px;
+    height: 40px;
+    mix-blend-mode: darken;
+}
+.options{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+}
+.wishlist a{
+    color: white;
+    text-decoration: none;
+}
