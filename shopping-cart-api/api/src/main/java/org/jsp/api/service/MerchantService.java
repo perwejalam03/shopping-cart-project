@@ -5,7 +5,10 @@ import java.util.HashMap;
 import org.jsp.api.configuration.EmailConfiguration;
 import org.jsp.api.dao.MerchantDao;
 import org.jsp.api.dto.Merchant;
+import org.jsp.api.dto.ResponseStructure;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,9 +24,12 @@ public class MerchantService {
 	@Autowired
 	private GenerateLinkService service;
 
-	public Merchant savMerchant(Merchant merchant, HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<Merchant>> savMerchant(Merchant merchant, HttpServletRequest request) {
+		ResponseStructure<Merchant> structure = new ResponseStructure<>();
+		structure.setData(dao.saveMerchant(merchant));
+		structure.setMessage("Registration successfull");
+		structure.setStatusCode(HttpStatus.CREATED.value());
 		configuration.setSubject("Registration successfull");
-		dao.saveMerchant(merchant);
 		HashMap<String, String> map = new HashMap<>();
 		map.put("email", merchant.getEmail());
 		map.put("name", merchant.getName());
@@ -33,23 +39,30 @@ public class MerchantService {
 				+ service.getVerificationLink(request, merchant));
 		configuration.setUser(map);
 		mailService.sendWelcomeMail(configuration);
-		return merchant;
+		return new ResponseEntity<ResponseStructure<Merchant>>(structure, HttpStatus.CREATED);
 	}
 
-	public String verifyMerchant(String token) {
+	public ResponseEntity<ResponseStructure<String>> verifyMerchant(String token) {
+		ResponseStructure<String> structure=new ResponseStructure<>();
 		Merchant merchant = dao.verifyMerchant(token);
 		if (merchant != null) {
 			merchant.setToken(null);
 			merchant.setStatus("Active");
 			dao.updateMerchant(merchant);
-			return "Your Account is Activated";
+			structure.setData("Your Account is Activated");
+			structure.setStatusCode(HttpStatus.OK.value());
+			structure.setMessage("Merchant is verified");
+			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.OK);
 		}
-		return "Invalid token";
+		structure.setData("Account is not activated");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		structure.setMessage("Invalid Token");
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
 	}
-	
-	public String sendResetPasswordLink(String email,HttpServletRequest request) {
-		Merchant merchant=dao.findMerchantByEmail(email);
-		if(merchant!=null) {
+
+	public String sendResetPasswordLink(String email, HttpServletRequest request) {
+		Merchant merchant = dao.findMerchantByEmail(email);
+		if (merchant != null) {
 			HashMap<String, String> map = new HashMap<>();
 			map.put("email", merchant.getEmail());
 			map.put("name", merchant.getName());
