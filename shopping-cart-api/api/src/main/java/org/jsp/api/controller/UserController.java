@@ -1,8 +1,10 @@
 package org.jsp.api.controller;
 
+import org.jsp.api.dto.ResponseStructure;
 import org.jsp.api.dto.User;
 import org.jsp.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +20,12 @@ public class UserController {
 	private UserService service;
 
 	@PostMapping("/users")
-	public User savMerchant(@RequestBody User user, HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<User>> savMerchant(@RequestBody User user, HttpServletRequest request) {
 		return service.saveUser(user, request);
 	}
 
 	@GetMapping("/users/verify")
-	public String verifyUser(@RequestParam String token) {
+	public ResponseEntity<ResponseStructure<String>> verifyUser(@RequestParam String token) {
 		return service.verifyUser(token);
 	}
 	
