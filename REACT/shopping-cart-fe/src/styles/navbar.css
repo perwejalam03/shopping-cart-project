@@ -25,3 +25,39 @@
     color: white;
     text-decoration: none;
 }
+.d1{
+    display: block;
+    position: absolute;
+    transform: translate(-50px,10px);
+
+}
+.d1 a{
+    display: block;
+    width: 100px;
+    height: 30px;
+    box-shadow: 0px 0px 4px gray;
+    text-decoration: none;
+    padding: 5px;
+}
+.d1 a:hover{
+    background-color: blue;
+    color: white;
+}
+#l3{
+    font-size: small;
+}
+.profile img:hover{
+    display: block;
+}
+.hambarger{
+    display: none;
+    mix-blend-mode: color-dodge;
+}
+@media (max-width:768px){
+    .hambarger{
+        display: block;
+    }
+    .options{
+        display: none;
+    }
+}
