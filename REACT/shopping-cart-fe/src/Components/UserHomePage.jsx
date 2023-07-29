@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import UserDashBoard from './UserDashBoard'
 import Navbar from './Navbar'
+import FooterPage from './FooterPage'
 
 const UserHomePage = () => {
   return (
@@ -10,6 +11,7 @@ const UserHomePage = () => {
       <Routes>
         <Route path='/' element={<UserDashBoard/>}/>
       </Routes>
+      <FooterPage/>
     </div>
   )
 }
