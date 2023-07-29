@@ -4,8 +4,11 @@ import java.util.HashMap;
 
 import org.jsp.api.configuration.EmailConfiguration;
 import org.jsp.api.dao.UserDao;
+import org.jsp.api.dto.ResponseStructure;
 import org.jsp.api.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,9 +23,12 @@ public class UserService {
 	@Autowired
 	private GenerateLinkService service;
 
-	public User saveUser(User user, HttpServletRequest request) {
-		configuration.setSubject("Registration successfull");
-		udao.saveUser(user);
+	public ResponseEntity<ResponseStructure<User>> saveUser(User user, HttpServletRequest request) {
+		ResponseStructure<User> structure=new ResponseStructure<>();
+		structure.setData(udao.saveUser(user));
+		structure.setMessage("Registration successful");
+		structure.setStatusCode(HttpStatus.CREATED.value());
+		configuration.setSubject("Registration successful");
 		HashMap<String, String> map = new HashMap<>();
 		map.put("email", user.getEmail());
 		map.put("name", user.getName());
@@ -32,18 +38,25 @@ public class UserService {
 				+ service.getVerificationLink(request, user));
 		configuration.setUser(map);
 		mailService.sendWelcomeMail(configuration);
-		return user;
+		return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.ACCEPTED);
 	}
 
-	public String verifyUser(String token) {
+	public ResponseEntity<ResponseStructure<String>> verifyUser(String token) {
+		ResponseStructure<String> structure=new ResponseStructure<>();
 		User user = udao.verifyUser(token);
 		if (user != null) {
 			user.setToken(null);
 			user.setStatus("Active");
 			udao.updateUser(user);
-			return "Your Account is Activated";
+			structure.setData("Your Account is Activated");
+			structure.setStatusCode(HttpStatus.OK.value());
+			structure.setMessage("User is verified");
+			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.OK);
 		}
-		return "Invalid token";
+		structure.setData("Account is not activated");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		structure.setMessage("Invalid Token");
+		return new ResponseEntity<>(structure,HttpStatus.NOT_FOUND);
 	}
 	
 	public String sendResetPasswordLink(String email,HttpServletRequest request) {
