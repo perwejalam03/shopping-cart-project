@@ -1,8 +1,10 @@
 package org.jsp.api.controller;
 
 import org.jsp.api.dto.Merchant;
+import org.jsp.api.dto.ResponseStructure;
 import org.jsp.api.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +21,12 @@ public class MerchantController {
 	private MerchantService service;
 
 	@PostMapping("/merchants")
-	public Merchant savMerchant(@RequestBody Merchant merchant, HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<Merchant>> savMerchant(@RequestBody Merchant merchant, HttpServletRequest request) {
 		return service.savMerchant(merchant, request);
 	}
 
 	@GetMapping("/merchants/verify")
-	public String verifyMerchant(@RequestParam String token) {
+	public ResponseEntity<ResponseStructure<String>> verifyMerchant(@RequestParam String token) {
 		return service.verifyMerchant(token);
 	}
 	
