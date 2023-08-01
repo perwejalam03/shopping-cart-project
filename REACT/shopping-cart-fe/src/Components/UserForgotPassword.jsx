@@ -5,10 +5,10 @@ import Form from 'react-bootstrap/Form';
 const UserForgotPassword = () => {
     let [email,setEmail]=useState("")
     let handleclick=()=>{
-        axios.post('http://localhost:8080/merchant/verify',email)
-        .then(()=>{alert(`OTP has benn sent to your ${email}`)})
-        .catch(()=>{alert("please enter the valid email")})
-    }
+      axios.get(`http://localhost:8080/users/forgot-password?email=${email}`)
+      .then(()=>{alert(`OTP has benn sent to your ${email}`)})
+      .catch(()=>{alert("please enter the valid email")})
+  }
   return (
     <div>
       <form action="">
