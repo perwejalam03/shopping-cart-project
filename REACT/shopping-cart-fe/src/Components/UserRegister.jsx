@@ -10,8 +10,8 @@ const UserRegister = () => {
     const [gender,setGender]=useState("")
   
     const handleRegister=(e)=>{
-      const merchant={name,phone,email,password,gender}
-      axios.post("http://localhost:8080/users",merchant)
+      const user={name,phone,email,password,gender}
+      axios.post("http://localhost:8080/users",user)
       .then(()=>{
         alert("Data added successfully")
         console.log("Data has been registered");})
