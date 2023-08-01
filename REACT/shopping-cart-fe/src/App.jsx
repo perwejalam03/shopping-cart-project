@@ -11,6 +11,7 @@ import UserHomePage from './Components/UserHomePage'
 import ErrorPage from './Components/ErrorPage'
 import MerchantForgotPassword from './Components/MerchantForgotPassword'
 import UserForgotPassword from './Components/UserForgotPassword'
+import AddItems from './Components/AddItems'
 const App = () => {
   return (
     <div>
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='*' element={<ErrorPage/>} />
         <Route path='/merchantforgotpassward' element={<MerchantForgotPassword/>}/>
         <Route path='/userforgotpassward' element={<UserForgotPassword/>}/>
+        <Route path='/additems' element={<AddItems/>}/>
       </Routes>
       </BrowserRouter>
     </div>
