@@ -7,6 +7,7 @@ const FooterPage = () => {
       <div className="footer">
       <Link to="">About Us</Link>
       <Link to="">Contact us</Link> 
+      <h5>&copy;copyright2023</h5>
       </div>     
     </div>
   )
