@@ -2,18 +2,21 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import "../styles/userlogin.css"
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const UserLogin = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
 
   const navigate=useNavigate()
-  const handlesignin=()=>{
-    if(email==='user' && password==='1234'){
-      navigate("/userhome")
-    }
-    else{
-      alert("Data is invalid")
-    }
+  const handlesignin=(e)=>{
+    axios.post(`http://localhost:8080/users/verify-login?email=${email}&password=${password}`)
+    .then(()=>{
+        navigate('/userhome')
+    })
+    .catch(()=>{
+      alert("Invaliid user name")
+    })
+    e.preventDefault();
   }
   return (
     <div>
