@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @CrossOrigin("http://localhost:3000/")
 public class UserController {
@@ -20,7 +21,7 @@ public class UserController {
 	private UserService service;
 
 	@PostMapping("/users")
-	public ResponseEntity<ResponseStructure<User>> savMerchant(@RequestBody User user, HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<User>> savUser(@RequestBody User user, HttpServletRequest request) {
 		return service.saveUser(user, request);
 	}
 
@@ -28,9 +29,16 @@ public class UserController {
 	public ResponseEntity<ResponseStructure<String>> verifyUser(@RequestParam String token) {
 		return service.verifyUser(token);
 	}
-	
+
 	@GetMapping("/users/forgot-password")
-	public String forgotPassword(@RequestParam String email,HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<String>> forgotPassword(@RequestParam String email,
+			HttpServletRequest request) {
 		return service.sendResetPasswordLink(email, request);
+	}
+
+	@PostMapping("/users/verify-login")
+	public ResponseEntity<ResponseStructure<User>> loginverifyByUser(@RequestParam String email,
+			@RequestParam String password) {
+		return service.loginverifyByUser(email, password);
 	}
 }
