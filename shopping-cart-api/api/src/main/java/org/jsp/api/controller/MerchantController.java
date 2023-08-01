@@ -21,7 +21,8 @@ public class MerchantController {
 	private MerchantService service;
 
 	@PostMapping("/merchants")
-	public ResponseEntity<ResponseStructure<Merchant>> savMerchant(@RequestBody Merchant merchant, HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<Merchant>> savMerchant(@RequestBody Merchant merchant,
+			HttpServletRequest request) {
 		return service.savMerchant(merchant, request);
 	}
 
@@ -29,9 +30,16 @@ public class MerchantController {
 	public ResponseEntity<ResponseStructure<String>> verifyMerchant(@RequestParam String token) {
 		return service.verifyMerchant(token);
 	}
-	
+
 	@GetMapping("/merchants/forgot-password")
-	public String forgotPassword(@RequestParam String email,HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<String>> forgotPassword(@RequestParam String email,
+			HttpServletRequest request) {
 		return service.sendResetPasswordLink(email, request);
+	}
+
+	@PostMapping("/merchants/verify-login")
+	public ResponseEntity<ResponseStructure<Merchant>> loginverifyByMerchant(@RequestParam String email,
+			@RequestParam String password) {
+		return service.loginverifyByMerchant(email, password);
 	}
 }
