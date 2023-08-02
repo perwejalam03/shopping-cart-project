@@ -11,7 +11,6 @@ import UserHomePage from './Components/UserHomePage'
 import ErrorPage from './Components/ErrorPage'
 import MerchantForgotPassword from './Components/MerchantForgotPassword'
 import UserForgotPassword from './Components/UserForgotPassword'
-import AddItems from './Components/AddItems'
 const App = () => {
   return (
     <div>
@@ -20,14 +19,13 @@ const App = () => {
         <Route path="/" element={<LandingPage/>} />
         <Route path='/userlogin' element={<UserLogin/>} />
         <Route path="/userregister" element={<UserRegister/>} />
-        <Route path='/userhome' element={<UserHomePage/>} />
+        <Route path='/userhome/*' element={<UserHomePage/>} />
         <Route path='/merchantlogin' element={<MerchantLogin/>} />
         <Route path='/merchantregister' element={<MerchantRegister/>}/>
-        <Route path='/merchanthome' element={<MerchantHomePage/>} />
+        <Route path='/merchanthome/*' element={<MerchantHomePage/>} />
         <Route path='*' element={<ErrorPage/>} />
         <Route path='/merchantforgotpassward' element={<MerchantForgotPassword/>}/>
         <Route path='/userforgotpassward' element={<UserForgotPassword/>}/>
-        <Route path='/additems' element={<AddItems/>}/>
       </Routes>
       </BrowserRouter>
     </div>
