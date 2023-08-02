@@ -9,12 +9,9 @@ const Navbar = () => {
             <div className="logo">
                 <img src="https://mir-s3-cdn-cf.behance.net/projects/404/b8bd62174560251.Y3JvcCw5MDAsNzAzLDAsOTg.jpg" alt="" />
             </div>
-            <div className="items">
-            <Link to='/additems'><h3>Add items</h3></Link>
-            </div>
             <div className="options">
                 <div className="wishlist">
-                    <Link to=''><h3>Wishlist</h3></Link>
+                    <Link to='/wishlist'><h3>Wishlist</h3></Link>
                 </div>
                 <div className="search">
                     <input type="text" placeholder='Search for Products, Brands and More' />
