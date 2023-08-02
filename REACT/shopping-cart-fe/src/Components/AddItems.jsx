@@ -28,9 +28,10 @@ const AddItems = () => {
         <Form.Label>Thumbnail Image:</Form.Label>
         <Form.Control type="text" placeholder="Image url" value={""} onChange={()=>{}} />
       </Form.Group>
+      <button className='btn btn-success'>Add Items</button>
         </form>
     </div>
   )
 }
 
-export default AddItems
+export default AddItems;
