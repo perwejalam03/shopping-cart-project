@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,11 @@ public class UserController {
 	@PostMapping("/users")
 	public ResponseEntity<ResponseStructure<User>> savUser(@RequestBody User user, HttpServletRequest request) {
 		return service.saveUser(user, request);
+	}
+
+	@PutMapping("/users")
+	public ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user) {
+		return service.updateUser(user);
 	}
 
 	@GetMapping("/users/verify")
