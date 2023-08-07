@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.jsp.api.dao.MerchantDao;
 import org.jsp.api.dao.ProductDao;
+import org.jsp.api.dao.UserDao;
 import org.jsp.api.dto.Merchant;
 import org.jsp.api.dto.Product;
 import org.jsp.api.dto.ResponseStructure;
+import org.jsp.api.dto.User;
 import org.jsp.api.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ public class ProductService {
 	private ProductDao dao;
 	@Autowired
 	private MerchantDao merchantDao;
+	@Autowired
+	private UserDao udao;
 
 	public ResponseEntity<ResponseStructure<Product>> saveProduct(@RequestBody Product product, int mid) {
 		ResponseStructure<Product> structure = new ResponseStructure<>();
@@ -85,5 +89,41 @@ public class ProductService {
 		structure.setMessage("Product Found");
 		structure.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
+	}
+
+	public ResponseEntity<ResponseStructure<String>> addToCart(int product_id, int user_id) {
+		Optional<User> recUser = udao.findById(user_id);
+		Optional<Product> recProduct = dao.findById(product_id);
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		if (recUser.isPresent() && recProduct.isPresent()) {
+			recUser.get().getCart().add(recProduct.get());
+			udao.updateUser(recUser.get());
+			structure.setData("Product added to the cart");
+			structure.setMessage("User and Product found");
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.ACCEPTED);
+		}
+		structure.setData("Cannot add Product to the cart");
+		structure.setMessage("Invalid UserId or Product Id");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+	}
+
+	public ResponseEntity<ResponseStructure<String>> addToWishList(int product_id, int user_id) {
+		Optional<User> recUser = udao.findById(user_id);
+		Optional<Product> recProduct = dao.findById(product_id);
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		if (recUser.isPresent() && recProduct.isPresent()) {
+			recUser.get().getWishList().add(recProduct.get());
+			udao.updateUser(recUser.get());
+			structure.setData("Product added to the wishList");
+			structure.setMessage("User and Product found");
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.ACCEPTED);
+		}
+		structure.setData("Cannot add Product to the wishList");
+		structure.setMessage("Invalid UserId or Product Id");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 	}
 }
