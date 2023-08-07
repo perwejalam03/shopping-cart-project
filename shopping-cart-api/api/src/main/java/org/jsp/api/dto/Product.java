@@ -29,9 +29,9 @@ public class Product {
 	private double price;
 	@Column(nullable = false, unique = true)
 	private String image;// Change later
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private double ratings;
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private int num_of_users;
 	@ManyToOne
 	@JoinColumn
