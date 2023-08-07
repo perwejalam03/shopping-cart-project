@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import "../styles/navbar.css"
+import "../styles/usernavbar.css"
 const Navbar = () => {
     let [sub,setSub]=useState(false);
   return (
@@ -11,7 +11,11 @@ const Navbar = () => {
             </div>
             <div className="options">
                 <div className="wishlist">
+                    <Link to='/addCart'><h3>Add to Kart</h3></Link>
                     <Link to='/wishlist'><h3>Wishlist</h3></Link>
+                    <Link to ='/address'><h3>Add Address</h3></Link>
+                    <Link to='/rateProduct'><h3>Rate Product</h3></Link>
+                    <Link to='/placeOrder'><h3>Place Order</h3></Link>
                 </div>
                 <div className="search">
                     <input type="text" placeholder='Search for Products, Brands and More' />
