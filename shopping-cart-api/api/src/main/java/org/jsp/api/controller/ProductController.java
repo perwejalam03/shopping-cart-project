@@ -21,24 +21,37 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 	@Autowired
 	private ProductService service;
-	
+
 	@PostMapping("/products/{id}")
-	public ResponseEntity<ResponseStructure<Product>> saveProduct(@RequestBody Product product,@PathVariable int id){
+	public ResponseEntity<ResponseStructure<Product>> saveProduct(@RequestBody Product product, @PathVariable int id) {
 		return service.saveProduct(product, id);
 	}
-	
+
 	@PutMapping("/products/{id}")
-	public ResponseEntity<ResponseStructure<Product>> updateProduct(@RequestBody Product product,@PathVariable int id){
+	public ResponseEntity<ResponseStructure<Product>> updateProduct(@RequestBody Product product,
+			@PathVariable int id) {
 		return service.updateProduct(product, id);
 	}
-	
+
 	@GetMapping("/products/{merchant_id}")
-	public ResponseEntity<ResponseStructure<List<Product>>> findById(@PathVariable int merchant_id){
+	public ResponseEntity<ResponseStructure<List<Product>>> findById(@PathVariable int merchant_id) {
 		return service.findProductByMerchantId(merchant_id);
 	}
-	
+
 	@DeleteMapping("/products/{id}")
-	public ResponseEntity<ResponseStructure<String>> deleteProduct(@PathVariable int id){
+	public ResponseEntity<ResponseStructure<String>> deleteProduct(@PathVariable int id) {
 		return service.deleteProduct(id);
+	}
+
+	@PostMapping("/products/{product_id}/{user_id}")
+	public ResponseEntity<ResponseStructure<String>> addToCart(@PathVariable int user_id,
+			@PathVariable int product_id) {
+		return service.addToCart(product_id, user_id);
+	}
+
+	@PostMapping("/products/add/{product_id}/{user_id}")
+	public ResponseEntity<ResponseStructure<String>> addToWishList(@PathVariable int user_id,
+			@PathVariable int product_id) {
+		return service.addToWishList (product_id, user_id);
 	}
 }
