@@ -27,7 +27,7 @@ public class MerchantService {
 	@Autowired
 	private GenerateLinkService service;
 
-	public ResponseEntity<ResponseStructure<Merchant>> savMerchant(Merchant merchant, HttpServletRequest request) {
+	public ResponseEntity<ResponseStructure<Merchant>> saveMerchant(Merchant merchant, HttpServletRequest request) {
 		ResponseStructure<Merchant> structure = new ResponseStructure<>();
 		structure.setData(dao.saveMerchant(merchant));
 		structure.setMessage("Merchant Registration successfull");
@@ -43,6 +43,13 @@ public class MerchantService {
 		configuration.setUser(map);
 		mailService.sendWelcomeMail(configuration);
 		return new ResponseEntity<ResponseStructure<Merchant>>(structure, HttpStatus.CREATED);
+	}
+	public ResponseEntity<ResponseStructure<Merchant>> updateMerchant(Merchant merchant) {
+		ResponseStructure<Merchant> structure = new ResponseStructure<>();
+		structure.setData(dao.updateMerchant(merchant));
+		structure.setMessage("Merchant Updated successfull");
+		structure.setStatusCode(HttpStatus.ACCEPTED.value());
+		return new ResponseEntity<ResponseStructure<Merchant>>(structure, HttpStatus.ACCEPTED);
 	}
 
 	public ResponseEntity<ResponseStructure<String>> verifyMerchant(String token) {
