@@ -10,7 +10,9 @@ const UserLogin = () => {
   const navigate=useNavigate()
   const handlesignin=(e)=>{
     axios.post(`http://localhost:8080/users/verify-login?email=${email}&password=${password}`)
-    .then(()=>{
+    .then((res)=>{
+      console.log(res.data.data);
+      localStorage.setItem("currentUser",JSON.stringify(res.data.data))
         navigate('/userhome')
     })
     .catch(()=>{
