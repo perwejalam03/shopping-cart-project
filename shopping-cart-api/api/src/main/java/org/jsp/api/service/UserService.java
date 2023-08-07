@@ -45,6 +45,14 @@ public class UserService {
 		return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.CREATED);
 	}
 
+	public ResponseEntity<ResponseStructure<User>> updateUser(User user) {
+		ResponseStructure<User> structure = new ResponseStructure<>();
+		structure.setData(udao.updateUser(user));
+		structure.setMessage("Update successful");
+		structure.setStatusCode(HttpStatus.ACCEPTED.value());
+		return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.ACCEPTED);
+	}
+
 	public ResponseEntity<ResponseStructure<String>> verifyUser(String token) {
 		ResponseStructure<String> structure = new ResponseStructure<>();
 		User user = udao.verifyUser(token);
