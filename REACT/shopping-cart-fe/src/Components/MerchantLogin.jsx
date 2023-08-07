@@ -10,7 +10,9 @@ const MerchantLogin = () => {
   const navigate=useNavigate()
   const handlesignin=(e)=>{
     axios.post(`http://localhost:8080/merchants/verify-login?email=${email}&password=${password}`)
-    .then(()=>{
+    .then((res)=>{
+        console.log(res.data.data);
+        localStorage.setItem("currentMerchant",JSON.stringify(res.data.data))
         navigate('/merchanthome')
     })
     .catch(()=>{
