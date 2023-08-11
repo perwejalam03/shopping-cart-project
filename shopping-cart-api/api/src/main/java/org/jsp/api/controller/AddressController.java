@@ -1,6 +1,7 @@
 package org.jsp.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.jsp.api.dto.Address;
 import org.jsp.api.dto.ResponseStructure;
@@ -33,7 +34,7 @@ public class AddressController {
 	}
 
 	@GetMapping("/address/{id}")
-	public ResponseEntity<ResponseStructure<Address>> findById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Optional<Address>>> findById(@PathVariable int id) {
 		return service.findAddressById(id);
 	}
 
