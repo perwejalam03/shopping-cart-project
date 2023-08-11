@@ -1,9 +1,13 @@
 package org.jsp.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -21,5 +25,9 @@ public class Address {
 	private String state;
 	private String country;
 	private long pincode;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	private User user;
 
 }
