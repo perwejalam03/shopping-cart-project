@@ -49,22 +49,23 @@ public class AddressService {
 		throw new IdNotFoundException();
 	}
 
-	public ResponseEntity<ResponseStructure<Address>> findAddressById(int id) {
-		ResponseStructure<Address> structure = new ResponseStructure<>();
+	public ResponseEntity<ResponseStructure<Optional<Address>>> findAddressById(int id) {
+		ResponseStructure<Optional<Address>> structure = new ResponseStructure<>();
 		Optional<Address> recAddress = adao.findById(id);
-		if (recAddress.isEmpty()) {
-			structure.setData(null);
+		if (recAddress.isPresent()) {
+			structure.setData(recAddress);
 			structure.setMessage("Address Not Found");
 			structure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<ResponseStructure<Address>>(structure, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ResponseStructure<Optional<Address>>>(structure, HttpStatus.NOT_FOUND);
 		}
 		throw new IdNotFoundException();
 	}
 
 	public ResponseEntity<ResponseStructure<String>> deleteAddress(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<>();
-		Optional<Address> recAddress = adao.findById(id);
-		if (recAddress.isEmpty()) {
+		Optional<Address> recAddress=adao.findById(id);
+		if (recAddress.isPresent()) {
+			adao.deleteAddress(recAddress.get().getId());
 			structure.setData("Address not found");
 			structure.setMessage("Address Not deleted");
 			structure.setStatusCode(HttpStatus.NOT_FOUND.value());
