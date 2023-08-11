@@ -90,6 +90,13 @@ public class ProductService {
 		structure.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
 	}
+	public ResponseEntity<ResponseStructure<List<Product>>> findAllProducts() {
+		ResponseStructure<List<Product>> structure = new ResponseStructure<>();
+		structure.setData(dao.findAllProducts());
+		structure.setMessage("Product Found");
+		structure.setStatusCode(HttpStatus.OK.value());
+		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
+	}
 
 	public ResponseEntity<ResponseStructure<String>> addToCart(int product_id, int user_id) {
 		Optional<User> recUser = udao.findById(user_id);
@@ -125,5 +132,25 @@ public class ProductService {
 		structure.setMessage("Invalid UserId or Product Id");
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+	}
+
+	public ResponseEntity<ResponseStructure<Product>> rateProduct(int product_id, int user_id, double ratings) {
+		Optional<User> recUser = udao.findById(user_id);
+		Optional<Product> recProduct = dao.findById(product_id);
+		ResponseStructure<Product> structure = new ResponseStructure<>();
+		if (recUser.isPresent() && recProduct.isPresent()) {
+			Product p = recProduct.get();
+			int n = p.getNum_of_users();
+			double r = p.getRatings() * n++;
+			ratings = (r + ratings) / n;
+			p.setNum_of_users(n);
+			p.setRatings(ratings);
+			dao.updateProduct(p);
+			structure.setData(p);
+			structure.setMessage("Product rated");
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Product>>(structure, HttpStatus.ACCEPTED);
+		}
+		throw new IdNotFoundException();
 	}
 }
