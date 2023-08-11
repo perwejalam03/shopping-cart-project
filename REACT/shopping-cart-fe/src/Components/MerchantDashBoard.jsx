@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "../styles/merchantdashboard.css"
 const MerchantDashBoard = () => {
   return (
     <div>
