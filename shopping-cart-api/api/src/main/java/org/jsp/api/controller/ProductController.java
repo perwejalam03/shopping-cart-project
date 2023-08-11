@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,6 +38,10 @@ public class ProductController {
 	public ResponseEntity<ResponseStructure<List<Product>>> findById(@PathVariable int merchant_id) {
 		return service.findProductByMerchantId(merchant_id);
 	}
+	@GetMapping("/products")
+	public ResponseEntity<ResponseStructure<List<Product>>> findAllProducts() {
+		return service.findAllProducts();
+	}
 
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteProduct(@PathVariable int id) {
@@ -52,6 +57,12 @@ public class ProductController {
 	@PostMapping("/products/add/{product_id}/{user_id}")
 	public ResponseEntity<ResponseStructure<String>> addToWishList(@PathVariable int user_id,
 			@PathVariable int product_id) {
-		return service.addToWishList (product_id, user_id);
+		return service.addToWishList(product_id, user_id);
+	}
+
+	@PutMapping("/products/rate/{product_id}/{user_id}")
+	public ResponseEntity<ResponseStructure<Product>> rateProduct(@PathVariable int user_id,
+			@PathVariable int product_id, @RequestParam double rating) {
+		return service.rateProduct(product_id, user_id, rating);
 	}
 }
