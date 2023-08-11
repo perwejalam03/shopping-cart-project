@@ -11,11 +11,10 @@ const Navbar = () => {
             </div>
             <div className="options">
                 <div className="wishlist">
-                    <Link to='/addCart'><h3>Add to Kart</h3></Link>
-                    <Link to='/wishlist'><h3>Wishlist</h3></Link>
-                    <Link to ='/address'><h3>Add Address</h3></Link>
-                    <Link to='/rateProduct'><h3>Rate Product</h3></Link>
-                    <Link to='/placeOrder'><h3>Place Order</h3></Link>
+                    <Link to='/userhome/addCart'><h3>Add to Kart</h3></Link>
+                    <Link to='/userhome/wishlist'><h3>Wishlist</h3></Link>
+                    <Link to='/userhome/rateProduct'><h3>Rate Product</h3></Link>
+                    <Link to='/userhome/placeOrder'><h3>Place Order</h3></Link>
                 </div>
                 <div className="search">
                     <input type="text" placeholder='Search for Products, Brands and More' />
@@ -26,6 +25,7 @@ const Navbar = () => {
                    {sub && <div className="d1">
                    <Link to='' id='l1'>Edit Profile</Link>
                     <Link to='' id='l2'>Check Order</Link>
+                    <Link to='' id=''>Add Address</Link>
                     <Link to='' id='l3'>Update Address</Link>
                     <Link to='' id='l4'>Logout</Link>
                    </div>}
