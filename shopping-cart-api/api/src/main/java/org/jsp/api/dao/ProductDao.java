@@ -33,4 +33,8 @@ public class ProductDao {
 		return repository.findProductsByMerchantId(merchant_id);
 	}
 
+	public List<Product> findAllProducts() {
+		return repository.findAll();
+	}
+
 }
