@@ -54,9 +54,9 @@ public class AddressService {
 		Optional<Address> recAddress = adao.findById(id);
 		if (recAddress.isPresent()) {
 			structure.setData(recAddress);
-			structure.setMessage("Address Not Found");
-			structure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<ResponseStructure<Optional<Address>>>(structure, HttpStatus.NOT_FOUND);
+			structure.setMessage("Address  Found");
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<Optional<Address>>>(structure, HttpStatus.OK);
 		}
 		throw new IdNotFoundException();
 	}
