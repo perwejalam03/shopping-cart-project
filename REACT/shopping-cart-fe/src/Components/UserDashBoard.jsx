@@ -6,6 +6,8 @@ import "../styles/userdashboard.css"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const UserDashBoard = () => {
+  let user=JSON.parse(localStorage.getItem("currentUser"))
+  console.log(user.id);
     let [products,setProducts]=useState([])
   useEffect(() => {
     let fetchData = () => {
@@ -20,6 +22,29 @@ const UserDashBoard = () => {
     };
     fetchData();
   },[]);
+
+  let addProducts=(id)=>{
+    axios.post(`http://localhost:8080/products/${id}/${user.id}`)
+    .then(()=>{
+      alert("added to cart")
+    }).catch(()=>{
+      console.log("Something wrong");
+    })
+
+  }
+
+  let addProductswishlist=(id)=>{
+    axios.post(`http://localhost:8080/products/add/${id}/${user.id}`)
+    .then((res)=>{
+      console.log(res.data.data);
+      alert("added to wishlist")
+    }).catch(()=>{
+      console.log("Something wrong");
+    })
+
+  }
+
+  
  return(
     <div className="view1">
         {products.map((x)=>{
@@ -37,7 +62,7 @@ const UserDashBoard = () => {
                   <p>MRP Price:<strike>{x.price}</strike></p>
                   <button className="btn btn-danger py-0 px-5">DEAL OF THE DAY</button>
                   <p>Discount Price:<h3 id="discount">{x.price-(x.price * 12/100)}</h3></p>
-                  <button className="btn btn-success b1">Add item</button>  <FavoriteIcon/>
+                  <button className="btn btn-success b1" onClick={()=>addProducts(x.id)}>Add item</button>  < FavoriteIcon onClick={()=>addProductswishlist(x.id)}/>
                 </div>
                </div>
                </div>
