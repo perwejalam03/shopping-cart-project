@@ -27,7 +27,7 @@ const Navbar = () => {
                     <Link to='' id='l2'>Check Order</Link>
                     <Link to='' id=''>Add Address</Link>
                     <Link to='' id='l3'>Update Address</Link>
-                    <Link to='' id='l4'>Logout</Link>
+                    <Link to='/' id='l4'>Logout</Link>
                    </div>}
                 </div>
             </div>
