@@ -11,8 +11,8 @@ const Navbar = () => {
             </div>
             <div className="options">
                 <div className="wishlist">
-                    <Link to='/userhome/addCart'><h3>Add to Kart</h3></Link>
-                    <Link to='/userhome/wishlist'><h3>Wishlist</h3></Link>
+                    <Link to='/userhome/addtoCart'><h3>Add to Kart</h3></Link>
+                    <Link to='/userhome/addtowishlist'><h3>Wishlist</h3></Link>
                     <Link to='/userhome/rateProduct'><h3>Rate Product</h3></Link>
                     <Link to='/userhome/placeOrder'><h3>Place Order</h3></Link>
                 </div>
