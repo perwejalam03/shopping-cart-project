@@ -38,6 +38,7 @@ public class ProductController {
 	public ResponseEntity<ResponseStructure<List<Product>>> findById(@PathVariable int merchant_id) {
 		return service.findProductByMerchantId(merchant_id);
 	}
+
 	@GetMapping("/products")
 	public ResponseEntity<ResponseStructure<List<Product>>> findAllProducts() {
 		return service.findAllProducts();
@@ -64,5 +65,15 @@ public class ProductController {
 	public ResponseEntity<ResponseStructure<Product>> rateProduct(@PathVariable int user_id,
 			@PathVariable int product_id, @RequestParam double rating) {
 		return service.rateProduct(product_id, user_id, rating);
+	}
+
+	@GetMapping("/products/cart/{id}")
+	public ResponseEntity<ResponseStructure<List<Product>>> findProductsInCart(@PathVariable int id) {
+		return service.findProductsInCart(id);
+	}
+
+	@GetMapping("/products/wishList/{id}")
+	public ResponseEntity<ResponseStructure<List<Product>>> findProductsInWishList(@PathVariable int id) {
+		return service.findProductsInWishList(id);
 	}
 }
