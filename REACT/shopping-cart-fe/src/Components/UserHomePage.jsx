@@ -4,6 +4,8 @@ import UserDashBoard from './UserDashBoard'
 import Navbar from './Navbar'
 import FooterPage from './FooterPage'
 import UserUpdate from './UserUpdate'
+import AddToCart from './AddToCart'
+import AddToWishList from './AddToWishList'
 
 const UserHomePage = () => {
   return (
@@ -12,6 +14,8 @@ const UserHomePage = () => {
       <Routes>
         <Route path='/' element={<UserDashBoard/>}/>
         <Route path='/userupdate' element={<UserUpdate/>}/>
+        <Route path='/addtocart' element={<AddToCart/>}/>
+        <Route path='addtowishList' element={<AddToWishList/>}/>
       </Routes>
       <FooterPage/>
     </div>
