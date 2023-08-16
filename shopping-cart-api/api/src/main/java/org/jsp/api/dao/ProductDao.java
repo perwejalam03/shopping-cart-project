@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.jsp.api.dto.Product;
 import org.jsp.api.repository.ProductRepository;
+import org.jsp.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 public class ProductDao {
 	@Autowired
 	private ProductRepository repository;
+	@Autowired
+	private UserRepository userRepository;
 
 	public Product saveProduct(Product product) {
 		return repository.save(product);
@@ -37,4 +40,11 @@ public class ProductDao {
 		return repository.findAll();
 	}
 
+	public List<Product> findProductsInCart(int id) {
+		return userRepository.findProductsInCart(id);
+	}
+
+	public List<Product> findProductsInWishList(int id) {
+		return userRepository.findProductsInWishList(id);
+	}
 }
