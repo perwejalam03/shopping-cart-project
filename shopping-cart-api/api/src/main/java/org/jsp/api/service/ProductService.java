@@ -90,6 +90,23 @@ public class ProductService {
 		structure.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
 	}
+
+	public ResponseEntity<ResponseStructure<List<Product>>> findProductsInCart(int id) {
+		ResponseStructure<List<Product>> structure = new ResponseStructure<>();
+		structure.setData(dao.findProductsInCart(id));
+		structure.setMessage("Following are the list of products in cart");
+		structure.setStatusCode(HttpStatus.OK.value());
+		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
+	}
+
+	public ResponseEntity<ResponseStructure<List<Product>>> findProductsInWishList(int id) {
+		ResponseStructure<List<Product>> structure = new ResponseStructure<>();
+		structure.setData(dao.findProductsInWishList(id));
+		structure.setMessage("Following are the list of products in wishList");
+		structure.setStatusCode(HttpStatus.OK.value());
+		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
+	}
+
 	public ResponseEntity<ResponseStructure<List<Product>>> findAllProducts() {
 		ResponseStructure<List<Product>> structure = new ResponseStructure<>();
 		structure.setData(dao.findAllProducts());
@@ -153,4 +170,5 @@ public class ProductService {
 		}
 		throw new IdNotFoundException();
 	}
+
 }
